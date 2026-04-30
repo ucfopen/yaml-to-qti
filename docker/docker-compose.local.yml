@@ -1,0 +1,4 @@
+# override python container start command to run gunicorn in debug mode
+services:
+  python:
+    command: gunicorn -b 0.0.0.0:5000 -w 4 --reload app.main:flask_app

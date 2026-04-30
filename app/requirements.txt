@@ -1,0 +1,5 @@
+Flask==3.1.0
+latex2mathml==3.77.0
+lxml==5.4.0
+markdown==3.8
+PyYAML==6.0.2

@@ -1,0 +1,104 @@
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.modal-dialog {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	position:fixed;
+
+	background: #000;
+	background: rgba(0,0,0,.5);
+
+	margin: 0;
+	padding: 0;
+
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+	z-index: 10000;
+}
+
+.modal-window {
+	min-height: 100px;
+	max-height: 500px;
+	overflow-y: auto;
+	position: relative;
+
+	min-width: 400px;
+	max-width: 75%;
+
+	background-color: #ffffff;
+	color: #333;
+
+	border: 1px solid black;
+	padding: 12px;
+	margin: 0 auto;
+
+	font-family: Verdana;
+	font-size: 13px;
+
+	h1 {
+		font-size: 1.5em;
+		margin: 0 0 1em;
+	}
+}
+
+.close-button {
+	display: block;
+	width: 1.5em;
+	height: 1.5em;
+	
+	position: absolute;
+	top: 1em;
+	right: 1em;
+
+	cursor: pointer;
+
+	text-align: center;
+	line-height: 1.5em;
+
+	color: #fff;
+	background-color: #f00;
+	background-color: rgba(255, 0, 0, 0.5);
+	border-radius: 0.25em;
+
+	user-select: none;
+
+	&:hover {
+		background-color: rgba(255, 0, 0, 0.9);
+	}
+}
+
+.hidden {
+	display: none;
+}
+
+form span {
+	display: block;
+}
+
+section:not(.modal-dialog) {
+	width: fit-content;
+	block-size: fit-content;
+	border: 1px solid #444;
+	border-radius: 0.25em;
+	padding: 1em 1em 0;
+	margin: 0 0 0.5em;
+
+	h1 {
+		margin: 0;
+	}
+}
+
+button a {
+	text-decoration: none;
+	color: inherit;
+}

@@ -1,0 +1,36 @@
+networks:
+  yaml-qti-backend:
+
+services:
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ../app:/var/www/html/app:ro
+      - ./config/nginx/sites-enabled:/etc/nginx/conf.d:ro
+      - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - yaml-qti-backend
+    depends_on:
+      - python
+
+  python:
+    build:
+      context: ../
+      dockerfile: python.Dockerfile
+    networks:
+      - yaml-qti-backend
+    volumes:
+      - ../app:/var/www/html/app
+      - tmp_data:/var/www/html/app/tmp
+    environment:
+      - FLASK_APP=/var/www/html/app/main.py
+      - APPLICATION_ROOT=/yaml-to-qti
+      - SCRIPT_NAME=/yaml-to-qti
+    # command: uwsgi --ini=/etc/uwsgi/uwsgi.ini --py-autoreload=2
+    command: gunicorn -b 0.0.0.0:5000 -w 4 app.main:flask_app
+    # command: python manage.py run -h 0.0.0.0
+
+volumes:
+  tmp_data:

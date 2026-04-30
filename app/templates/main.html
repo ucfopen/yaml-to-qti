@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="icon" type="image/x-icon" href="static/favicon.ico">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"
+			integrity="sha512-CSBhVREyzHAjAFfBlIBakjoRUKp5h7VSweP0InR/pAJyptH7peuhCsqAI/snV+TwZmXZqoUklpXp6R6wMnYf5Q=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer">
+		</script>
+		<script>
+			const APP_ROOT = "{{ request.script_root }}";
+		</script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>	</head>
+	<body>
+		<section id="error-background" class="hidden modal-dialog">
+			<div id="error-window" class="modal-window">
+				<span id="error-close" class="close-button">X</span>
+				<h1>Error:</h1>
+				<span id="error-message"></span>
+			</div>
+		</section>
+		<section id="exposition-yaml">
+			<h1>YAML to QTI Conversion Tool</h1>
+			<br/>
+			<button>
+				<a href="{{ url_for('static', filename='YAML_formatting_prompt.md') }}" download>
+					Download standard YAML formatting prompt for GenAI output
+				</a>
+			</button>
+			<p>Upload a properly formatted YAML file to be processed.</p>
+			<p>A QTI package will be generated and offered as a downloadable .zip file.</p>
+			<p>You may also upload a .zip file containing the YAML file and all necessary media files.</p>
+			<p>If you would like multiple-choice or multiple-answer questions to have their answer choices shuffled, check the corresponding box below prior to uploading.</p>
+		</section>
+		<section>
+			<form id="upload-form" action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+				<span id="file-input">
+					<label for="file-in">Input file:</label>
+					<input id="file-in" name="file-in" type="file" accept="application/x-yaml,application/zip,.yml,.yaml,.zip" />
+				</span>
+				<span id="shuffle-input">
+					<label>Shuffle multiple-choice/multiple-answer questions?</label>
+					<input id="shuffle" name="shuffle" type="checkbox" />
+				</span>
+				<div id="exposition-media" class="hidden">
+					<p>Media references were detected in the YAML.</p>
+					<p>Upload a .zip file containing all necessary media files.</p>
+				</div>
+				<span id="media-input" class="hidden">
+					<label for="media-in">Media file:</label>
+					<input id="media-in" name="media-in" type="file" accept="application/zip,.zip" />
+				</span>
+				<br/>
+				<button id="upload-button" class="hidden">
+					Upload
+				</button>
+			</form>
+		</section>
+	</body>
+</html>
